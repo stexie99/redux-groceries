@@ -25,7 +25,7 @@ const groceryReducer = (state = initialState.groceries, action)=>{
 let store = Redux.createStore(groceryReducer)
 
 const clearList = () => {
-    document.getElementById('newitem').value = ''
+    document.getElementById('newItem').value = ''
     store.dispatch({
         type:'grocery/clear'
     })
@@ -38,13 +38,15 @@ const newGrocery = (e) => {
         type:'grocery/add',
         text: groceryText
     })
-    console.log(store.getState())
 }
 
 grocerySubmit.addEventListener('click', (e)=>{newGrocery(e)})
 clearBtn.addEventListener('click', clearList)
 
 const renderList = (state) =>  {
+    while(list.firstChild){
+        list.removeChild(list.firstChild)
+    }
     state.forEach(grocery => {
         let li = document.createElement('li')
         list.appendChild(li)
